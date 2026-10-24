@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Supabase Auth Sign up Page</title>
+    <title>Supabase Auth Page</title>
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
@@ -12,19 +12,20 @@
         <form onsubmit="createNewUser(event)">
           <h1>Create Account</h1>
           <input type="text" id="signup-name" placeholder="Name" required />
-          <input type="tel" id="signup-phone" placeholder="Phone" required />
+          <input type="tel" id="signup-phone" placeholder="Phone" />
           <input type="email" id="signup-email" placeholder="Email" required />
           <input
             type="password"
             id="signup-password"
             placeholder="Password"
+            minlength="8"
             required
           />
           <button type="submit">Sign Up</button>
         </form>
       </div>
       <div class="form-container sign-in-container">
-        <form onsubmit="signin(event)">
+        <form onsubmit="logInUser(event)">
           <h1>Sign in</h1>
           <input type="email" id="signin-email" placeholder="Email" required />
           <input
@@ -56,7 +57,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../scripts/signup.js"></script>
-    <script src="../scripts/script.js"></script>
+    <script src="../scripts/auth.js"></script>
   </body>
 </html>

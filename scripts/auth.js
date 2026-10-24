@@ -1,3 +1,8 @@
+const supabaseURL = "https://baiatiwucgslosyrtfuv.supabase.co";
+const SupabaseKey = "sb_publishable_4RKSX2Eq2zYTjWiEPEu6vg_b1pRjN37";
+
+const supabaseClient = supabase.createClient(supabaseURL, SupabaseKey);
+
 const signUpButton = document.getElementById("signUp");
 const signInButton = document.getElementById("signIn");
 const container = document.getElementById("container");
@@ -29,17 +34,35 @@ const createNewUser = async (event) => {
     },
   });
 
-  console.log(response);
-
   if (!response.error) {
     alert("Your account has been created successfully!");
-    window.location.href = "../pages/signin.html";
+    signUpName.value = "";
+    signUpPhone.value = "";
+    signUpEmail.value = "";
+    signUpPassword.value = "";
+    window.location.href = "../pages/auth.html";
   } else {
     alert(response.error.message);
   }
+};
 
-  signUpName.value = "";
-  signUpPhone.value = "";
-  signUpEmail.value = "";
-  signUpPassword.value = "";
+const signInEmail = document.querySelector("#signin-email");
+const signInPassword = document.querySelector("#signin-password");
+
+const logInUser = async (event) => {
+  event.preventDefault();
+
+  const response = await supabaseClient.auth.signInWithPassword({
+    email: signInEmail.value,
+    password: signInPassword.value,
+  });
+
+  if (!response.error) {
+    alert("Login successful! Welcome back.");
+    signInEmail.value = "";
+    signInPassword.value = "";
+    window.location.href = "../pages/dashboard.html";
+  } else {
+    alert(response.error.message);
+  }
 };
